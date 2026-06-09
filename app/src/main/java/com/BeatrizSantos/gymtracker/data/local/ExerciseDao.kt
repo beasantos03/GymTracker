@@ -8,7 +8,9 @@ import androidx.room.Query
 interface ExerciseDao {
 
     @Insert
-    suspend fun insertExercise(exercise: ExerciseEntity)
+    suspend fun insertExercise(
+        exercise: ExerciseEntity
+    ): Long
 
     @Query("SELECT * FROM exercises")
     suspend fun getAllExercises(): List<ExerciseEntity>

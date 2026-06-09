@@ -9,9 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun WorkoutDetailScreen(
-    workoutId: Long,
-    onAddExerciseClick: (Long) -> Unit
+fun AddExerciseScreen(
+    workoutId: Long
 ) {
 
     Column(
@@ -21,22 +20,22 @@ fun WorkoutDetailScreen(
     ) {
 
         Text(
-            text = "Detalhes do Treino",
+            text = "Novo Exercício",
             style = MaterialTheme.typography.headlineMedium
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("ID do treino: $workoutId")
+        Text("Treino ID: $workoutId")
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
             onClick = {
-                onAddExerciseClick(workoutId)
+                // implementar mais tarde
             }
         ) {
-            Text("Adicionar Exercício")
+            Text("Guardar Exercício")
         }
     }
 }
