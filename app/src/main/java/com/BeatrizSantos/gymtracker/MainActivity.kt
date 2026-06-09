@@ -3,8 +3,12 @@ package com.BeatrizSantos.gymtracker
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.BeatrizSantos.gymtracker.navigation.NavGraph
+import com.BeatrizSantos.gymtracker.ui.screens.AddWorkoutScreen
 import com.BeatrizSantos.gymtracker.ui.screens.WorkoutListScreen
 import com.BeatrizSantos.gymtracker.ui.theme.GymTrackerTheme
+import com.BeatrizSantos.gymtracker.ui.screens.AddWorkoutScreen
+import com.BeatrizSantos.gymtracker.navigation.NavGraph
 
 class MainActivity : ComponentActivity() {
 
@@ -13,7 +17,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             GymTrackerTheme {
-                WorkoutListScreen()
+                NavGraph()
+
             }
         }
     }
