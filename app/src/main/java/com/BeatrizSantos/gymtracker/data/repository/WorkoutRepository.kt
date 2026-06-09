@@ -2,6 +2,7 @@ package com.BeatrizSantos.gymtracker.data.repository
 
 import com.BeatrizSantos.gymtracker.data.local.WorkoutDao
 import com.BeatrizSantos.gymtracker.data.local.WorkoutEntity
+import kotlinx.coroutines.flow.Flow
 
 class WorkoutRepository(
     private val workoutDao: WorkoutDao
@@ -11,7 +12,7 @@ class WorkoutRepository(
         workoutDao.insertWorkout(workout)
     }
 
-    suspend fun getWorkouts(): List<WorkoutEntity> {
+    fun getWorkouts(): Flow<List<WorkoutEntity>> {
         return workoutDao.getAllWorkouts()
     }
 }

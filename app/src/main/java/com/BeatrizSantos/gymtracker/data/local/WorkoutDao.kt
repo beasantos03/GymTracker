@@ -3,6 +3,7 @@ package com.BeatrizSantos.gymtracker.data.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WorkoutDao {
@@ -11,5 +12,5 @@ interface WorkoutDao {
     suspend fun insertWorkout(workout: WorkoutEntity)
 
     @Query("SELECT * FROM workouts")
-    suspend fun getAllWorkouts(): List<WorkoutEntity>
+    fun getAllWorkouts(): Flow<List<WorkoutEntity>>
 }

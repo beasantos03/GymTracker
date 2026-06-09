@@ -5,9 +5,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 
 @Composable
-fun AddWorkoutScreen() {
+fun AddWorkoutScreen(
+    viewModel: WorkoutViewModel,
+    onWorkoutSaved: () -> Unit
+) {
 
     var workoutName by remember { mutableStateOf("") }
     var workoutDescription by remember { mutableStateOf("") }
@@ -45,7 +49,16 @@ fun AddWorkoutScreen() {
 
         Button(
             onClick = {
-                // Vamos guardar na base de dados mais tarde
+
+                if (workoutName.isNotBlank()) {
+
+                    viewModel.addWorkout(
+                        name = workoutName,
+                        description = workoutDescription
+                    )
+
+                    onWorkoutSaved()
+                }
             }
         ) {
             Text("Guardar")
