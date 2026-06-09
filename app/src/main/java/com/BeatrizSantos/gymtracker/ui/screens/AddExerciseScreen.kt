@@ -1,10 +1,8 @@
 package com.BeatrizSantos.gymtracker.ui.screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -12,6 +10,11 @@ import androidx.compose.ui.unit.dp
 fun AddExerciseScreen(
     workoutId: Long
 ) {
+
+    var exerciseName by remember { mutableStateOf("") }
+    var sets by remember { mutableStateOf("") }
+    var reps by remember { mutableStateOf("") }
+    var weight by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -28,11 +31,47 @@ fun AddExerciseScreen(
 
         Text("Treino ID: $workoutId")
 
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            value = exerciseName,
+            onValueChange = { exerciseName = it },
+            label = { Text("Nome do exercício") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        OutlinedTextField(
+            value = sets,
+            onValueChange = { sets = it },
+            label = { Text("Séries") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        OutlinedTextField(
+            value = reps,
+            onValueChange = { reps = it },
+            label = { Text("Repetições") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        OutlinedTextField(
+            value = weight,
+            onValueChange = { weight = it },
+            label = { Text("Peso (kg)") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
             onClick = {
-                // implementar mais tarde
+                // Vamos ligar à Room no próximo passo
             }
         ) {
             Text("Guardar Exercício")
