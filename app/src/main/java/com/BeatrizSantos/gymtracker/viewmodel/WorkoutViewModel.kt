@@ -39,4 +39,11 @@ class WorkoutViewModel(
     ): WorkoutEntity? {
         return repository.getWorkoutById(workoutId)
     }
+    fun deleteWorkout(
+        workout: WorkoutEntity
+    ) {
+        viewModelScope.launch {
+            repository.deleteWorkout(workout)
+        }
+    }
 }

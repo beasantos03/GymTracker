@@ -12,6 +12,12 @@ class WorkoutRepository(
         workoutDao.insertWorkout(workout)
     }
 
+    suspend fun deleteWorkout(
+        workout: WorkoutEntity
+    ) {
+        workoutDao.deleteWorkout(workout)
+    }
+
     fun getWorkouts(): Flow<List<WorkoutEntity>> {
         return workoutDao.getAllWorkouts()
     }

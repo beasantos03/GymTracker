@@ -68,12 +68,25 @@ fun WorkoutListScreen(
 
                         Spacer(modifier = Modifier.height(12.dp))
 
-                        Button(
-                            onClick = {
-                                onWorkoutClick(workout.id)
-                            }
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            Text("Abrir Treino")
+
+                            Button(
+                                onClick = {
+                                    onWorkoutClick(workout.id)
+                                }
+                            ) {
+                                Text("Abrir")
+                            }
+
+                            Button(
+                                onClick = {
+                                    viewModel.deleteWorkout(workout)
+                                }
+                            ) {
+                                Text("Eliminar")
+                            }
                         }
                     }
                 }
