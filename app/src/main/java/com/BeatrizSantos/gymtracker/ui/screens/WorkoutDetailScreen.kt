@@ -31,6 +31,23 @@ fun WorkoutDetailScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        Text(
+            text = "Exercícios",
+            style = MaterialTheme.typography.titleLarge
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Text("Supino")
+        Text("4 séries x 10 reps - 60kg")
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Text("Crucifixo")
+        Text("3 séries x 12 reps - 15kg")
+
+        Spacer(modifier = Modifier.height(24.dp))
+
         Button(
             onClick = {
                 onAddExerciseClick(workoutId)
