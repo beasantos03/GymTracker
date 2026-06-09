@@ -8,7 +8,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AddExerciseScreen(
-    workoutId: Long
+    workoutId: Long,
+    onExerciseSaved: () -> Unit
 ) {
 
     var exerciseName by remember { mutableStateOf("") }
@@ -71,9 +72,16 @@ fun AddExerciseScreen(
 
         Button(
             onClick = {
-                // Vamos ligar à Room no próximo passo
+
+                if (
+                    exerciseName.isNotBlank() &&
+                    sets.isNotBlank() &&
+                    reps.isNotBlank()
+                ) {
+                    onExerciseSaved()
+                }
             }
-        ) {
+        ){
             Text("Guardar Exercício")
         }
     }

@@ -85,7 +85,10 @@ fun NavGraph() {
                     ?.toLongOrNull() ?: 0L
 
             AddExerciseScreen(
-                workoutId = workoutId
+                workoutId = workoutId,
+                onExerciseSaved = {
+                    navController.popBackStack()
+                }
             )
         }
 
