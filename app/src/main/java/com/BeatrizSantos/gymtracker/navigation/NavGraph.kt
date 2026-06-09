@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.BeatrizSantos.gymtracker.data.local.DatabaseProvider
 import com.BeatrizSantos.gymtracker.data.repository.WorkoutRepository
 import com.BeatrizSantos.gymtracker.ui.screens.AddWorkoutScreen
+import com.BeatrizSantos.gymtracker.ui.screens.WorkoutDetailScreen
 import com.BeatrizSantos.gymtracker.ui.screens.WorkoutListScreen
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModelFactory
@@ -41,6 +42,9 @@ fun NavGraph() {
                 viewModel = workoutViewModel,
                 onAddWorkoutClick = {
                     navController.navigate("addWorkout")
+                },
+                onWorkoutClick = { workoutId ->
+                    navController.navigate("workout/$workoutId")
                 }
             )
         }
@@ -52,6 +56,18 @@ fun NavGraph() {
                 onWorkoutSaved = {
                     navController.popBackStack()
                 }
+            )
+        }
+
+        composable("workout/{workoutId}") { backStackEntry ->
+
+            val workoutId =
+                backStackEntry.arguments
+                    ?.getString("workoutId")
+                    ?.toLongOrNull() ?: 0L
+
+            WorkoutDetailScreen(
+                workoutId = workoutId
             )
         }
     }

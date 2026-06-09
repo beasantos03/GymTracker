@@ -7,7 +7,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
@@ -15,7 +14,8 @@ import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 @Composable
 fun WorkoutListScreen(
     viewModel: WorkoutViewModel,
-    onAddWorkoutClick: () -> Unit
+    onAddWorkoutClick: () -> Unit,
+    onWorkoutClick: (Long) -> Unit
 ) {
 
     val workouts by viewModel.workouts.collectAsState()
@@ -46,7 +46,9 @@ fun WorkoutListScreen(
             items(workouts) { workout ->
 
                 Column(
-                    modifier = Modifier.padding(vertical = 8.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
                 ) {
 
                     Text(
@@ -57,6 +59,16 @@ fun WorkoutListScreen(
                     Text(
                         text = workout.description
                     )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Button(
+                        onClick = {
+                            onWorkoutClick(workout.id)
+                        }
+                    ) {
+                        Text("Abrir Treino")
+                    }
                 }
             }
         }
