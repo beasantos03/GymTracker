@@ -8,8 +8,16 @@ class WorkoutRepository(
     private val workoutDao: WorkoutDao
 ) {
 
-    suspend fun addWorkout(workout: WorkoutEntity) {
+    suspend fun addWorkout(
+        workout: WorkoutEntity
+    ) {
         workoutDao.insertWorkout(workout)
+    }
+
+    suspend fun updateWorkout(
+        workout: WorkoutEntity
+    ) {
+        workoutDao.updateWorkout(workout)
     }
 
     suspend fun deleteWorkout(

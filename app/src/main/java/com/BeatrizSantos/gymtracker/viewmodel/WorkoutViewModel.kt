@@ -34,16 +34,26 @@ class WorkoutViewModel(
             )
         }
     }
-    suspend fun getWorkoutById(
-        workoutId: Long
-    ): WorkoutEntity? {
-        return repository.getWorkoutById(workoutId)
+
+    fun updateWorkout(
+        workout: WorkoutEntity
+    ) {
+        viewModelScope.launch {
+            repository.updateWorkout(workout)
+        }
     }
+
     fun deleteWorkout(
         workout: WorkoutEntity
     ) {
         viewModelScope.launch {
             repository.deleteWorkout(workout)
         }
+    }
+
+    suspend fun getWorkoutById(
+        workoutId: Long
+    ): WorkoutEntity? {
+        return repository.getWorkoutById(workoutId)
     }
 }
