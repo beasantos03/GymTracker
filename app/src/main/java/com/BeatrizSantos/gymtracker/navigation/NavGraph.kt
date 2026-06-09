@@ -6,6 +6,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import com.BeatrizSantos.gymtracker.data.local.DatabaseProvider
 import com.BeatrizSantos.gymtracker.data.repository.WorkoutRepository
 import com.BeatrizSantos.gymtracker.ui.screens.AddExerciseScreen
@@ -14,7 +19,7 @@ import com.BeatrizSantos.gymtracker.ui.screens.WorkoutDetailScreen
 import com.BeatrizSantos.gymtracker.ui.screens.WorkoutListScreen
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModelFactory
-
+import com.BeatrizSantos.gymtracker.ui.screens.EditWorkoutScreen
 
 @Composable
 fun NavGraph() {
@@ -47,6 +52,9 @@ fun NavGraph() {
                 },
                 onWorkoutClick = { workoutId ->
                     navController.navigate("workout/$workoutId")
+                },
+                onEditWorkoutClick = { workoutId ->
+                    navController.navigate("editWorkout/$workoutId")
                 }
             )
         }
@@ -92,5 +100,31 @@ fun NavGraph() {
             )
         }
 
+        composable("editWorkout/{workoutId}") { backStackEntry ->
+
+            val workoutId =
+                backStackEntry.arguments
+                    ?.getString("workoutId")
+                    ?.toLongOrNull() ?: 0L
+
+            var workout by remember {
+                mutableStateOf<com.BeatrizSantos.gymtracker.data.local.WorkoutEntity?>(null)
+            }
+
+            LaunchedEffect(workoutId) {
+                workout = workoutViewModel.getWorkoutById(workoutId)
+            }
+
+            workout?.let {
+
+                EditWorkoutScreen(
+                    workout = it,
+                    viewModel = workoutViewModel,
+                    onWorkoutUpdated = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+        }
     }
 }

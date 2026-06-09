@@ -19,8 +19,9 @@ import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 fun WorkoutListScreen(
     viewModel: WorkoutViewModel,
     onAddWorkoutClick: () -> Unit,
-    onWorkoutClick: (Long) -> Unit
-) {
+    onWorkoutClick: (Long) -> Unit,
+    onEditWorkoutClick: (Long) -> Unit
+){
 
     val workouts by viewModel.workouts.collectAsState()
 
@@ -104,6 +105,14 @@ fun WorkoutListScreen(
                                     }
                                 ) {
                                     Text("Abrir")
+                                }
+
+                                Button(
+                                    onClick = {
+                                        onEditWorkoutClick(workout.id)
+                                    }
+                                ) {
+                                    Text("Editar")
                                 }
 
                                 Button(
