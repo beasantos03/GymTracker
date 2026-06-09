@@ -70,6 +70,7 @@ fun NavGraph() {
 
             WorkoutDetailScreen(
                 workoutId = workoutId,
+                viewModel = workoutViewModel,
                 onAddExerciseClick = { id ->
                     navController.navigate("addExercise/$id")
                 }

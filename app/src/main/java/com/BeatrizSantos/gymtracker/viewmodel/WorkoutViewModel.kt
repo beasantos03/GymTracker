@@ -34,4 +34,9 @@ class WorkoutViewModel(
             )
         }
     }
+    suspend fun getWorkoutById(
+        workoutId: Long
+    ): WorkoutEntity? {
+        return repository.getWorkoutById(workoutId)
+    }
 }

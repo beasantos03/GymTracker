@@ -15,4 +15,10 @@ class WorkoutRepository(
     fun getWorkouts(): Flow<List<WorkoutEntity>> {
         return workoutDao.getAllWorkouts()
     }
+
+    suspend fun getWorkoutById(
+        workoutId: Long
+    ): WorkoutEntity? {
+        return workoutDao.getWorkoutById(workoutId)
+    }
 }
