@@ -113,9 +113,12 @@ fun NavGraph() {
 
             val userGoal by profileViewModel.userGoal.collectAsState()
 
+            val workouts by workoutViewModel.workouts.collectAsState()
+
             HomeScreen(
                 userName = userName,
                 userGoal = userGoal,
+                workoutCount = workouts.size,
 
                 onPlansClick = {
                     navController.navigate("plans")

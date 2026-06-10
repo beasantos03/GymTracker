@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 fun HomeScreen(
     userName: String,
     userGoal: String,
+    workoutCount: Int,
     onPlansClick: () -> Unit,
     onMyWorkoutsClick: () -> Unit,
     onProfileClick: () -> Unit
@@ -41,6 +42,15 @@ fun HomeScreen(
         Text(
             text = "Objetivo: $userGoal",
             style = MaterialTheme.typography.bodyLarge
+        )
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+        Text(
+            text = "Treinos criados: $workoutCount",
+            style = MaterialTheme.typography.titleMedium
         )
 
         Spacer(
