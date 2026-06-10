@@ -149,17 +149,42 @@ fun NavGraph() {
                 },
 
                 onEditProfileClick = {
-
+                    navController.navigate("editProfile")
                 },
 
                 onDeleteProfileClick = {
 
                     profileViewModel.clearProfile()
 
+                    workoutViewModel.deleteAllWorkouts()
+
                     navController.navigate("profile") {
 
                         popUpTo(0)
                     }
+                }
+            )
+        }
+
+        composable("editProfile") {
+
+            val userName by profileViewModel.userName.collectAsState()
+
+            val userGoal by profileViewModel.userGoal.collectAsState()
+
+            ProfileScreen(
+                initialName = userName,
+                initialGoal = userGoal,
+                title = "Editar Perfil",
+
+                onContinueClick = { name, goal ->
+
+                    profileViewModel.saveProfile(
+                        name = name,
+                        goal = goal
+                    )
+
+                    navController.popBackStack()
                 }
             )
         }

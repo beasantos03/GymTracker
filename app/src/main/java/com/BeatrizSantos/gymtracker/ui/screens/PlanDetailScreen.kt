@@ -2,13 +2,15 @@ package com.BeatrizSantos.gymtracker.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.data.model.Plan
-
 
 @Composable
 fun PlanDetailScreen(
@@ -23,27 +25,54 @@ fun PlanDetailScreen(
             .padding(16.dp)
     ) {
 
+        Spacer(
+            modifier = Modifier.height(48.dp)
+        )
+
         Text(
             text = plan.name,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
 
         Spacer(
-            modifier = Modifier.height(12.dp)
+            modifier = Modifier.height(16.dp)
         )
 
-        Text(
-            text = plan.description,
-            style = MaterialTheme.typography.bodyLarge
-        )
+        Card(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text("Descrição")
+
+                Spacer(
+                    modifier = Modifier.height(4.dp)
+                )
+
+                Text(
+                    text = plan.description,
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+        }
 
         Spacer(
             modifier = Modifier.height(24.dp)
         )
 
         Text(
-            text = "Estrutura do plano",
-            style = MaterialTheme.typography.titleLarge
+            text = "Estrutura do Plano",
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
 
         Spacer(
@@ -54,69 +83,101 @@ fun PlanDetailScreen(
 
             1 -> {
 
-                Text("Push")
-                Text("• Supino")
-                Text("• Desenvolvimento Militar")
-                Text("• Elevação Lateral")
-                Text("• Tríceps Pulldown")
+                PlanSectionCard(
+                    title = "Push",
+                    exercises = listOf(
+                        "Supino",
+                        "Desenvolvimento Militar",
+                        "Elevação Lateral",
+                        "Tríceps Pulldown"
+                    )
+                )
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Text("Pull")
-                Text("• Puxada")
-                Text("• Remada")
-                Text("• Face Pull")
-                Text("• Curl Bíceps")
+                PlanSectionCard(
+                    title = "Pull",
+                    exercises = listOf(
+                        "Puxada",
+                        "Remada",
+                        "Face Pull",
+                        "Curl Bíceps"
+                    )
+                )
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Text("Legs")
-                Text("• Agachamento")
-                Text("• Leg Press")
-                Text("• Extensora")
-                Text("• Gémeos")
+                PlanSectionCard(
+                    title = "Legs",
+                    exercises = listOf(
+                        "Agachamento",
+                        "Leg Press",
+                        "Extensora",
+                        "Gémeos"
+                    )
+                )
             }
 
             2 -> {
 
-                Text("Upper")
-                Text("• Supino")
-                Text("• Remada")
-                Text("• Desenvolvimento Militar")
+                PlanSectionCard(
+                    title = "Upper",
+                    exercises = listOf(
+                        "Supino",
+                        "Remada",
+                        "Desenvolvimento Militar"
+                    )
+                )
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Text("Lower")
-                Text("• Agachamento")
-                Text("• Leg Press")
-                Text("• Gémeos")
+                PlanSectionCard(
+                    title = "Lower",
+                    exercises = listOf(
+                        "Agachamento",
+                        "Leg Press",
+                        "Gémeos"
+                    )
+                )
             }
 
             3 -> {
 
-                Text("Peito e Tríceps")
-                Text("• Supino")
-                Text("• Supino Inclinado")
-                Text("• Crucifixo")
-                Text("• Tríceps Pulldown")
+                PlanSectionCard(
+                    title = "Peito e Tríceps",
+                    exercises = listOf(
+                        "Supino",
+                        "Supino Inclinado",
+                        "Crucifixo",
+                        "Tríceps Pulldown"
+                    )
+                )
             }
 
             4 -> {
 
-                Text("Costas e Bíceps")
-                Text("• Puxada")
-                Text("• Remada")
-                Text("• Curl Bíceps")
-                Text("• Hammer Curl")
+                PlanSectionCard(
+                    title = "Costas e Bíceps",
+                    exercises = listOf(
+                        "Puxada",
+                        "Remada",
+                        "Curl Bíceps",
+                        "Hammer Curl"
+                    )
+                )
             }
 
             5 -> {
 
-                Text("Full Body")
-                Text("• Agachamento")
-                Text("• Supino")
-                Text("• Remada")
-                Text("• Desenvolvimento Militar")
+                PlanSectionCard(
+                    title = "Full Body",
+                    exercises = listOf(
+                        "Agachamento",
+                        "Supino",
+                        "Remada",
+                        "Desenvolvimento Militar"
+                    )
+                )
             }
         }
 
@@ -141,7 +202,36 @@ fun PlanDetailScreen(
         ) {
             Text("Voltar")
         }
+    }
+}
 
+@Composable
+private fun PlanSectionCard(
+    title: String,
+    exercises: List<String>
+) {
 
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(
+                modifier = Modifier.height(8.dp)
+            )
+
+            exercises.forEach { exercise ->
+
+                Text("• $exercise")
+            }
+        }
     }
 }

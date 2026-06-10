@@ -30,6 +30,10 @@ class WorkoutRepository(
         return workoutDao.getAllWorkouts()
     }
 
+    suspend fun deleteAllWorkouts() {
+        workoutDao.deleteAllWorkouts()
+    }
+
     suspend fun getWorkoutById(
         workoutId: Long
     ): WorkoutEntity? {

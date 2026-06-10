@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.data.local.WorkoutEntity
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
@@ -30,12 +31,20 @@ fun EditWorkoutScreen(
             .padding(16.dp)
     ) {
 
-        Text(
-            text = "Editar Treino",
-            style = MaterialTheme.typography.headlineMedium
+        Spacer(
+            modifier = Modifier.height(48.dp)
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Editar Treino",
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(
+            modifier = Modifier.height(24.dp)
+        )
 
         OutlinedTextField(
             value = workoutName,
@@ -48,7 +57,9 @@ fun EditWorkoutScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
 
         OutlinedTextField(
             value = workoutDescription,

@@ -6,6 +6,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModel
+import com.BeatrizSantos.gymtracker.data.model.exerciseCatalog
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 
 @Composable
 fun AddExerciseScreen(
@@ -16,6 +19,9 @@ fun AddExerciseScreen(
 ) {
 
     var exerciseName by remember { mutableStateOf("") }
+    var expanded by remember {
+        mutableStateOf(false)
+    }
     var sets by remember { mutableStateOf("") }
     var reps by remember { mutableStateOf("") }
     var weight by remember { mutableStateOf("") }
@@ -37,12 +43,44 @@ fun AddExerciseScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
-            value = exerciseName,
-            onValueChange = { exerciseName = it },
-            label = { Text("Nome do exercício") },
+        Button(
+            onClick = {
+                expanded = true
+            },
             modifier = Modifier.fillMaxWidth()
-        )
+        ) {
+
+            Text(
+                if (exerciseName.isBlank())
+                    "Selecionar Exercício"
+                else
+                    exerciseName
+            )
+        }
+
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = {
+                expanded = false
+            }
+        ) {
+
+            exerciseCatalog.forEach { exercise ->
+
+                DropdownMenuItem(
+                    text = {
+                        Text(exercise)
+                    },
+
+                    onClick = {
+
+                        exerciseName = exercise
+
+                        expanded = false
+                    }
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 

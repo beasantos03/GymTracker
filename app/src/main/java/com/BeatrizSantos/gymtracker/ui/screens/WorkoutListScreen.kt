@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.data.local.WorkoutEntity
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.Alignment
 
 @Composable
 fun WorkoutListScreen(
@@ -36,19 +38,49 @@ fun WorkoutListScreen(
             .padding(16.dp)
     ) {
 
+        Spacer(
+            modifier = Modifier.height(48.dp)
+        )
+
         Text(
-            text = "Gym Tracker",
-            style = MaterialTheme.typography.headlineMedium
+            text = "Os Meus Treinos",
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            text = "Total de treinos: ${workouts.size}",
-            style = MaterialTheme.typography.titleMedium
-        )
+        Card(
+            modifier = Modifier.fillMaxWidth()
+        ) {
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = "Total de treinos",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+
+                Spacer(
+                    modifier = Modifier.height(8.dp)
+                )
+
+                Text(
+                    text = workouts.size.toString(),
+                    style = MaterialTheme.typography.headlineLarge
+                )
+            }
+        }
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
 
         Button(
             onClick = onAddWorkoutClick,
@@ -85,7 +117,7 @@ fun WorkoutListScreen(
 
                             Text(
                                 text = workout.name,
-                                style = MaterialTheme.typography.titleLarge
+                                style = MaterialTheme.typography.headlineSmall
                             )
 
                             Spacer(modifier = Modifier.height(4.dp))
@@ -95,7 +127,7 @@ fun WorkoutListScreen(
                                 style = MaterialTheme.typography.bodyMedium
                             )
 
-                            Spacer(modifier = Modifier.height(12.dp))
+                            Spacer(modifier = Modifier.height(16.dp))
 
                             Row(
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)

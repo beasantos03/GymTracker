@@ -44,6 +44,13 @@ class WorkoutViewModel(
         }
     }
 
+    fun deleteAllWorkouts() {
+
+        viewModelScope.launch {
+            repository.deleteAllWorkouts()
+        }
+    }
+
     fun deleteWorkout(
         workout: WorkoutEntity
     ) {
@@ -120,6 +127,8 @@ class WorkoutViewModel(
             }
         }
     }
+
+
 
 
 

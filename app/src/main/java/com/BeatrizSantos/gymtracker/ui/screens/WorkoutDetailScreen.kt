@@ -2,14 +2,16 @@ package com.BeatrizSantos.gymtracker.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
-import kotlinx.coroutines.launch
 import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModel
+import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 
 @Composable
 fun WorkoutDetailScreen(
@@ -18,7 +20,7 @@ fun WorkoutDetailScreen(
     exerciseViewModel: ExerciseViewModel,
     onAddExerciseClick: (Long) -> Unit,
     onBackClick: () -> Unit
-){
+) {
 
     var workoutName by remember { mutableStateOf("A carregar...") }
     var workoutDescription by remember { mutableStateOf("") }
@@ -43,46 +45,96 @@ fun WorkoutDetailScreen(
             .padding(16.dp)
     ) {
 
+        Spacer(
+            modifier = Modifier.height(48.dp)
+        )
+
         Text(
             text = workoutName,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Text(
-            text = workoutDescription,
-            style = MaterialTheme.typography.bodyLarge
+        Spacer(
+            modifier = Modifier.height(16.dp)
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Card(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = "Descrição"
+                )
+
+                Spacer(
+                    modifier = Modifier.height(4.dp)
+                )
+
+                Text(
+                    text = workoutDescription,
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+        }
+
+        Spacer(
+            modifier = Modifier.height(24.dp)
+        )
 
         Text(
             text = "Exercícios",
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
 
         if (exercises.isEmpty()) {
 
-            Text("Ainda não existem exercícios.")
+            Text(
+                text = "Ainda não existem exercícios.",
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
 
         } else {
 
             exercises.forEach { exercise ->
 
-                Text(
-                    text = exercise.exerciseName,
-                    style = MaterialTheme.typography.titleMedium
-                )
+                Card(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
 
-                Text(
-                    text =
-                        "${exercise.sets} séries x " +
-                                "${exercise.reps} reps - " +
-                                "${exercise.weight}kg"
-                )
+                    Column(
+                        modifier = Modifier.padding(16.dp)
+                    ) {
+
+                        Text(
+                            text = exercise.exerciseName,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+
+                        Spacer(
+                            modifier = Modifier.height(4.dp)
+                        )
+
+                        Text(
+                            text = "${exercise.sets} séries x ${exercise.reps} reps - ${exercise.weight}kg"
+                        )
+                    }
+                }
 
                 Spacer(
                     modifier = Modifier.height(12.dp)

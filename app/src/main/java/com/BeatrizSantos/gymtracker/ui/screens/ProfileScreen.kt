@@ -8,18 +8,21 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ProfileScreen(
+    initialName: String = "",
+    initialGoal: String = "Ganhar Massa Muscular",
+    title: String = "Criar Perfil",
     onContinueClick: (
         name: String,
         goal: String
     ) -> Unit
-) {
+){
 
     var name by remember {
-        mutableStateOf("")
+        mutableStateOf(initialName)
     }
 
     var goal by remember {
-        mutableStateOf("Ganhar Massa Muscular")
+        mutableStateOf(initialGoal)
     }
 
     Column(
@@ -29,7 +32,7 @@ fun ProfileScreen(
     ) {
 
         Text(
-            text = "Criar Perfil",
+            text = title,
             style = MaterialTheme.typography.headlineMedium
         )
 

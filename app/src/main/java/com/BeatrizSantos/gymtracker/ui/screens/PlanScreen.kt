@@ -1,5 +1,6 @@
 package com.BeatrizSantos.gymtracker.ui.screens
 
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.data.model.Plan
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun PlansScreen(
@@ -63,9 +65,15 @@ fun PlansScreen(
             .padding(16.dp)
     ) {
 
+        Spacer(
+            modifier = Modifier.height(48.dp)
+        )
+
         Text(
             text = "Planos de Treino",
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
 
         Spacer(
@@ -87,12 +95,12 @@ fun PlansScreen(
                 ) {
 
                     Column(
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier.padding(20.dp)
                     ) {
 
                         Text(
                             text = plan.name,
-                            style = MaterialTheme.typography.titleLarge
+                            style = MaterialTheme.typography.headlineSmall
                         )
 
                         Spacer(
