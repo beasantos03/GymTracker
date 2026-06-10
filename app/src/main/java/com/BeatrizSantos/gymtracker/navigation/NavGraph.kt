@@ -164,8 +164,13 @@ fun NavGraph() {
         composable("plans") {
 
             PlansScreen(
+
                 onPlanClick = { plan ->
                     navController.navigate("planDetail/${plan.id}")
+                },
+
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -220,6 +225,10 @@ fun NavGraph() {
                     )
 
                     navController.navigate("workouts")
+                },
+
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -228,14 +237,21 @@ fun NavGraph() {
 
             WorkoutListScreen(
                 viewModel = workoutViewModel,
+
                 onAddWorkoutClick = {
                     navController.navigate("addWorkout")
                 },
+
                 onWorkoutClick = { workoutId ->
                     navController.navigate("workout/$workoutId")
                 },
+
                 onEditWorkoutClick = { workoutId ->
                     navController.navigate("editWorkout/$workoutId")
+                },
+
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -261,8 +277,13 @@ fun NavGraph() {
                 workoutId = workoutId,
                 viewModel = workoutViewModel,
                 exerciseViewModel = exerciseViewModel,
+
                 onAddExerciseClick = { id ->
                     navController.navigate("addExercise/$id")
+                },
+
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }

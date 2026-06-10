@@ -20,7 +20,8 @@ fun WorkoutListScreen(
     viewModel: WorkoutViewModel,
     onAddWorkoutClick: () -> Unit,
     onWorkoutClick: (Long) -> Unit,
-    onEditWorkoutClick: (Long) -> Unit
+    onEditWorkoutClick: (Long) -> Unit,
+    onBackClick: () -> Unit
 ){
 
     val workouts by viewModel.workouts.collectAsState()
@@ -68,6 +69,7 @@ fun WorkoutListScreen(
         } else {
 
             LazyColumn(
+                modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
 
@@ -127,6 +129,16 @@ fun WorkoutListScreen(
                     }
                 }
             }
+        }
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+        Button(
+            onClick = onBackClick,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Voltar")
         }
     }
 

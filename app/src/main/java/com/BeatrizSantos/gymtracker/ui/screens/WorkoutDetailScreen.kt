@@ -16,8 +16,9 @@ fun WorkoutDetailScreen(
     workoutId: Long,
     viewModel: WorkoutViewModel,
     exerciseViewModel: ExerciseViewModel,
-    onAddExerciseClick: (Long) -> Unit
-) {
+    onAddExerciseClick: (Long) -> Unit,
+    onBackClick: () -> Unit
+){
 
     var workoutName by remember { mutableStateOf("A carregar...") }
     var workoutDescription by remember { mutableStateOf("") }
@@ -89,14 +90,28 @@ fun WorkoutDetailScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(
+            modifier = Modifier.weight(1f)
+        )
 
         Button(
             onClick = {
                 onAddExerciseClick(workoutId)
-            }
+            },
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Adicionar Exercício")
+        }
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+        Button(
+            onClick = onBackClick,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Voltar")
         }
     }
 }

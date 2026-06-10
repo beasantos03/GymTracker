@@ -9,10 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.data.model.Plan
 
+
 @Composable
 fun PlanDetailScreen(
     plan: Plan,
-    onUsePlanClick: () -> Unit
+    onUsePlanClick: () -> Unit,
+    onBackClick: () -> Unit
 ) {
 
     Column(
@@ -119,7 +121,7 @@ fun PlanDetailScreen(
         }
 
         Spacer(
-            modifier = Modifier.height(32.dp)
+            modifier = Modifier.weight(1f)
         )
 
         Button(
@@ -128,5 +130,18 @@ fun PlanDetailScreen(
         ) {
             Text("Utilizar Plano")
         }
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+        Button(
+            onClick = onBackClick,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Voltar")
+        }
+
+
     }
 }
