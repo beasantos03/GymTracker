@@ -40,16 +40,83 @@ fun PlanDetailScreen(
         )
 
         Text(
-            text = "Exemplo de divisão:"
+            text = "Estrutura do plano",
+            style = MaterialTheme.typography.titleLarge
         )
 
         Spacer(
-            modifier = Modifier.height(8.dp)
+            modifier = Modifier.height(12.dp)
         )
 
-        Text("Dia 1 - Push")
-        Text("Dia 2 - Pull")
-        Text("Dia 3 - Legs")
+        when (plan.id) {
+
+            1 -> {
+
+                Text("Push")
+                Text("• Supino")
+                Text("• Desenvolvimento Militar")
+                Text("• Elevação Lateral")
+                Text("• Tríceps Pulldown")
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text("Pull")
+                Text("• Puxada")
+                Text("• Remada")
+                Text("• Face Pull")
+                Text("• Curl Bíceps")
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text("Legs")
+                Text("• Agachamento")
+                Text("• Leg Press")
+                Text("• Extensora")
+                Text("• Gémeos")
+            }
+
+            2 -> {
+
+                Text("Upper")
+                Text("• Supino")
+                Text("• Remada")
+                Text("• Desenvolvimento Militar")
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text("Lower")
+                Text("• Agachamento")
+                Text("• Leg Press")
+                Text("• Gémeos")
+            }
+
+            3 -> {
+
+                Text("Peito e Tríceps")
+                Text("• Supino")
+                Text("• Supino Inclinado")
+                Text("• Crucifixo")
+                Text("• Tríceps Pulldown")
+            }
+
+            4 -> {
+
+                Text("Costas e Bíceps")
+                Text("• Puxada")
+                Text("• Remada")
+                Text("• Curl Bíceps")
+                Text("• Hammer Curl")
+            }
+
+            5 -> {
+
+                Text("Full Body")
+                Text("• Agachamento")
+                Text("• Supino")
+                Text("• Remada")
+                Text("• Desenvolvimento Militar")
+            }
+        }
 
         Spacer(
             modifier = Modifier.height(32.dp)
