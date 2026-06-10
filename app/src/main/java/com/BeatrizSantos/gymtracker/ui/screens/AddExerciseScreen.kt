@@ -11,7 +11,8 @@ import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModel
 fun AddExerciseScreen(
     workoutId: Long,
     exerciseViewModel: ExerciseViewModel,
-    onExerciseSaved: () -> Unit
+    onExerciseSaved: () -> Unit,
+    onBackClick: () -> Unit
 ) {
 
     var exerciseName by remember { mutableStateOf("") }
@@ -70,7 +71,9 @@ fun AddExerciseScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(
+            modifier = Modifier.weight(1f)
+        )
 
         Button(
             onClick = {
@@ -91,9 +94,21 @@ fun AddExerciseScreen(
 
                     onExerciseSaved()
                 }
-            }
-        ){
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Text("Guardar Exercício")
+        }
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+        Button(
+            onClick = onBackClick,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Voltar")
         }
     }
 }

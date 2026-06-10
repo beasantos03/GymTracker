@@ -12,7 +12,8 @@ import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 fun EditWorkoutScreen(
     workout: WorkoutEntity,
     viewModel: WorkoutViewModel,
-    onWorkoutUpdated: () -> Unit
+    onWorkoutUpdated: () -> Unit,
+    onBackClick: () -> Unit
 ) {
 
     var workoutName by remember {
@@ -60,7 +61,9 @@ fun EditWorkoutScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(
+            modifier = Modifier.weight(1f)
+        )
 
         Button(
             onClick = {
@@ -73,9 +76,21 @@ fun EditWorkoutScreen(
                 )
 
                 onWorkoutUpdated()
-            }
+            },
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Guardar Alterações")
+        }
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+        Button(
+            onClick = onBackClick,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Voltar")
         }
     }
 }

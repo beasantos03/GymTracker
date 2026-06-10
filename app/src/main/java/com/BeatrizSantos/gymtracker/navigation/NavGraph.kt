@@ -260,7 +260,12 @@ fun NavGraph() {
 
             AddWorkoutScreen(
                 viewModel = workoutViewModel,
+
                 onWorkoutSaved = {
+                    navController.popBackStack()
+                },
+
+                onBackClick = {
                     navController.popBackStack()
                 }
             )
@@ -298,7 +303,12 @@ fun NavGraph() {
             AddExerciseScreen(
                 workoutId = workoutId,
                 exerciseViewModel = exerciseViewModel,
+
                 onExerciseSaved = {
+                    navController.popBackStack()
+                },
+
+                onBackClick = {
                     navController.popBackStack()
                 }
             )
@@ -324,7 +334,12 @@ fun NavGraph() {
                 EditWorkoutScreen(
                     workout = it,
                     viewModel = workoutViewModel,
+
                     onWorkoutUpdated = {
+                        navController.popBackStack()
+                    },
+
+                    onBackClick = {
                         navController.popBackStack()
                     }
                 )
