@@ -34,6 +34,7 @@ import com.BeatrizSantos.gymtracker.viewmodel.ProfileViewModelFactory
 import com.BeatrizSantos.gymtracker.ui.screens.PlansScreen
 import com.BeatrizSantos.gymtracker.ui.screens.PlanDetailScreen
 import com.BeatrizSantos.gymtracker.data.model.Plan
+import com.BeatrizSantos.gymtracker.ui.screens.UserProfileScreen
 
 @Composable
 fun NavGraph() {
@@ -122,6 +123,40 @@ fun NavGraph() {
 
                 onMyWorkoutsClick = {
                     navController.navigate("workouts")
+                },
+
+                onProfileClick = {
+                    navController.navigate("userProfile")
+                }
+            )
+        }
+
+        composable("userProfile") {
+
+            val userName by profileViewModel.userName.collectAsState()
+
+            val userGoal by profileViewModel.userGoal.collectAsState()
+
+            UserProfileScreen(
+                userName = userName,
+                userGoal = userGoal,
+
+                onBackClick = {
+                    navController.popBackStack()
+                },
+
+                onEditProfileClick = {
+
+                },
+
+                onDeleteProfileClick = {
+
+                    profileViewModel.clearProfile()
+
+                    navController.navigate("profile") {
+
+                        popUpTo(0)
+                    }
                 }
             )
         }

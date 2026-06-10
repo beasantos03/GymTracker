@@ -5,33 +5,36 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+
 @Composable
-fun HomeScreen(
+fun UserProfileScreen(
     userName: String,
     userGoal: String,
-    onPlansClick: () -> Unit,
-    onMyWorkoutsClick: () -> Unit,
-    onProfileClick: () -> Unit
+    onBackClick: () -> Unit,
+    onEditProfileClick: () -> Unit,
+    onDeleteProfileClick: () -> Unit
 ) {
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(16.dp)
     ) {
 
+        Text(
+            text = "Perfil",
+            style = MaterialTheme.typography.headlineMedium
+        )
+
         Spacer(
-            modifier = Modifier.height(48.dp)
+            modifier = Modifier.height(24.dp)
         )
 
         Text(
-            text = "Olá, $userName ",
-            style = MaterialTheme.typography.headlineMedium
+            text = "Nome: $userName"
         )
 
         Spacer(
@@ -39,19 +42,18 @@ fun HomeScreen(
         )
 
         Text(
-            text = "Objetivo: $userGoal",
-            style = MaterialTheme.typography.bodyLarge
+            text = "Objetivo: $userGoal"
         )
 
         Spacer(
-            modifier = Modifier.height(48.dp)
+            modifier = Modifier.height(32.dp)
         )
 
         Button(
-            onClick = onPlansClick,
+            onClick = onEditProfileClick,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Planos de Treino")
+            Text("Editar Perfil")
         }
 
         Spacer(
@@ -59,21 +61,21 @@ fun HomeScreen(
         )
 
         Button(
-            onClick = onMyWorkoutsClick,
+            onClick = onDeleteProfileClick,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Os Meus Treinos")
+            Text("Apagar Perfil")
         }
 
         Spacer(
-            modifier = Modifier.height(16.dp)
+            modifier = Modifier.weight(1f)
         )
 
         Button(
-            onClick = onProfileClick,
+            onClick = onBackClick,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Perfil")
+            Text("Voltar")
         }
     }
 }

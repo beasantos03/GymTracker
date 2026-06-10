@@ -48,4 +48,12 @@ class ProfileViewModel(
             )
         }
     }
+
+    fun clearProfile() {
+
+        viewModelScope.launch {
+
+            userPreferences.clearProfile()
+        }
+    }
 }

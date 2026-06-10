@@ -60,4 +60,16 @@ class UserPreferences(
 
             preferences[PROFILE_CREATED] ?: false
         }
+
+    suspend fun clearProfile() {
+
+        context.dataStore.edit { preferences ->
+
+            preferences[USER_NAME] = ""
+
+            preferences[USER_GOAL] = ""
+
+            preferences[PROFILE_CREATED] = false
+        }
+    }
 }
