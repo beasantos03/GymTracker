@@ -57,4 +57,70 @@ class WorkoutViewModel(
     ): WorkoutEntity? {
         return repository.getWorkoutById(workoutId)
     }
+
+    fun importPlan(
+        planId: Int
+    ) {
+
+        when (planId) {
+
+            1 -> {
+
+                addWorkout(
+                    "Push",
+                    "Peito, Ombros e Tríceps"
+                )
+
+                addWorkout(
+                    "Pull",
+                    "Costas e Bíceps"
+                )
+
+                addWorkout(
+                    "Legs",
+                    "Pernas"
+                )
+            }
+
+            2 -> {
+
+                addWorkout(
+                    "Upper",
+                    "Parte superior"
+                )
+
+                addWorkout(
+                    "Lower",
+                    "Parte inferior"
+                )
+            }
+
+            3 -> {
+
+                addWorkout(
+                    "Peito e Tríceps",
+                    "Plano focado em peito"
+                )
+            }
+
+            4 -> {
+
+                addWorkout(
+                    "Costas e Bíceps",
+                    "Plano focado em costas"
+                )
+            }
+
+            5 -> {
+
+                addWorkout(
+                    "Full Body",
+                    "Treino de corpo inteiro"
+                )
+            }
+        }
+    }
+
+
+
 }

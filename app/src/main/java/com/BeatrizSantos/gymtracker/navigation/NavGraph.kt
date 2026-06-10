@@ -31,6 +31,9 @@ import com.BeatrizSantos.gymtracker.ui.screens.HomeScreen
 import com.BeatrizSantos.gymtracker.ui.screens.ProfileScreen
 import com.BeatrizSantos.gymtracker.viewmodel.ProfileViewModel
 import com.BeatrizSantos.gymtracker.viewmodel.ProfileViewModelFactory
+import com.BeatrizSantos.gymtracker.ui.screens.PlansScreen
+import com.BeatrizSantos.gymtracker.ui.screens.PlanDetailScreen
+import com.BeatrizSantos.gymtracker.data.model.Plan
 
 @Composable
 fun NavGraph() {
@@ -114,10 +117,73 @@ fun NavGraph() {
                 userGoal = userGoal,
 
                 onPlansClick = {
-                    // fazemos depois
+                    navController.navigate("plans")
                 },
 
                 onMyWorkoutsClick = {
+                    navController.navigate("workouts")
+                }
+            )
+        }
+
+        composable("plans") {
+
+            PlansScreen(
+                onPlanClick = { plan ->
+                    navController.navigate("planDetail/${plan.id}")
+                }
+            )
+        }
+
+        composable("planDetail/{planId}") { backStackEntry ->
+
+            val planId =
+                backStackEntry.arguments
+                    ?.getString("planId")
+                    ?.toIntOrNull() ?: 1
+
+            val plan = when (planId) {
+
+                1 -> Plan(
+                    1,
+                    "Push Pull Legs",
+                    "Plano clássico de hipertrofia."
+                )
+
+                2 -> Plan(
+                    2,
+                    "Upper Lower",
+                    "Divisão superior e inferior."
+                )
+
+                3 -> Plan(
+                    3,
+                    "Peito e Tríceps",
+                    "Treino focado em peito."
+                )
+
+                4 -> Plan(
+                    4,
+                    "Costas e Bíceps",
+                    "Treino focado em costas."
+                )
+
+                else -> Plan(
+                    5,
+                    "Full Body",
+                    "Treino de corpo inteiro."
+                )
+            }
+
+            PlanDetailScreen(
+                plan = plan,
+
+                onUsePlanClick = {
+
+                    workoutViewModel.importPlan(
+                        plan.id
+                    )
+
                     navController.navigate("workouts")
                 }
             )
