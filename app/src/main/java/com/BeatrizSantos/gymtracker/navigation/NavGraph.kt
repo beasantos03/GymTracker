@@ -25,11 +25,23 @@ import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModel
 import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModelFactory
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModelFactory
+import androidx.compose.runtime.collectAsState
+import com.BeatrizSantos.gymtracker.data.preferences.UserPreferences
+import com.BeatrizSantos.gymtracker.ui.screens.HomeScreen
+import com.BeatrizSantos.gymtracker.ui.screens.ProfileScreen
+import com.BeatrizSantos.gymtracker.viewmodel.ProfileViewModel
+import com.BeatrizSantos.gymtracker.viewmodel.ProfileViewModelFactory
 
 @Composable
 fun NavGraph() {
 
     val context = LocalContext.current
+
+    val userPreferences = UserPreferences(context)
+
+    val profileViewModel: ProfileViewModel = viewModel(
+        factory = ProfileViewModelFactory(userPreferences)
+    )
 
     val database = DatabaseProvider.getDatabase(context)
 
@@ -56,12 +68,60 @@ fun NavGraph() {
         )
     )
 
+    val profileCreated by profileViewModel
+        .profileCreated
+        .collectAsState()
+
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = "workouts"
+        startDestination =
+            if (profileCreated)
+                "home"
+            else
+                "profile"
     ) {
+
+        composable("profile") {
+
+            ProfileScreen(
+
+                onContinueClick = { name, goal ->
+
+                    profileViewModel.saveProfile(
+                        name = name,
+                        goal = goal
+                    )
+
+                    navController.navigate("home") {
+                        popUpTo("profile") {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
+
+        composable("home") {
+
+            val userName by profileViewModel.userName.collectAsState()
+
+            val userGoal by profileViewModel.userGoal.collectAsState()
+
+            HomeScreen(
+                userName = userName,
+                userGoal = userGoal,
+
+                onPlansClick = {
+                    // fazemos depois
+                },
+
+                onMyWorkoutsClick = {
+                    navController.navigate("workouts")
+                }
+            )
+        }
 
         composable("workouts") {
 
