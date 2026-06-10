@@ -9,16 +9,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 import kotlinx.coroutines.launch
+import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModel
 
 @Composable
 fun WorkoutDetailScreen(
     workoutId: Long,
     viewModel: WorkoutViewModel,
+    exerciseViewModel: ExerciseViewModel,
     onAddExerciseClick: (Long) -> Unit
 ) {
 
     var workoutName by remember { mutableStateOf("A carregar...") }
     var workoutDescription by remember { mutableStateOf("") }
+
+    val exercises by exerciseViewModel
+        .getExercisesForWorkout(workoutId)
+        .collectAsState(initial = emptyList())
 
     LaunchedEffect(workoutId) {
 
@@ -57,13 +63,31 @@ fun WorkoutDetailScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Text("Supino")
-        Text("4 séries x 10 reps - 60kg")
+        if (exercises.isEmpty()) {
 
-        Spacer(modifier = Modifier.height(12.dp))
+            Text("Ainda não existem exercícios.")
 
-        Text("Crucifixo")
-        Text("3 séries x 12 reps - 15kg")
+        } else {
+
+            exercises.forEach { exercise ->
+
+                Text(
+                    text = exercise.exerciseName,
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Text(
+                    text =
+                        "${exercise.sets} séries x " +
+                                "${exercise.reps} reps - " +
+                                "${exercise.weight}kg"
+                )
+
+                Spacer(
+                    modifier = Modifier.height(12.dp)
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(24.dp))
 

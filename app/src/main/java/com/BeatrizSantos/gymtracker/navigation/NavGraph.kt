@@ -1,25 +1,30 @@
 package com.BeatrizSantos.gymtracker.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.LaunchedEffect
 import com.BeatrizSantos.gymtracker.data.local.DatabaseProvider
+import com.BeatrizSantos.gymtracker.data.local.WorkoutEntity
+import com.BeatrizSantos.gymtracker.data.repository.ExerciseRepository
+import com.BeatrizSantos.gymtracker.data.repository.WorkoutExerciseRepository
 import com.BeatrizSantos.gymtracker.data.repository.WorkoutRepository
 import com.BeatrizSantos.gymtracker.ui.screens.AddExerciseScreen
 import com.BeatrizSantos.gymtracker.ui.screens.AddWorkoutScreen
+import com.BeatrizSantos.gymtracker.ui.screens.EditWorkoutScreen
 import com.BeatrizSantos.gymtracker.ui.screens.WorkoutDetailScreen
 import com.BeatrizSantos.gymtracker.ui.screens.WorkoutListScreen
+import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModel
+import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModelFactory
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModel
 import com.BeatrizSantos.gymtracker.viewmodel.WorkoutViewModelFactory
-import com.BeatrizSantos.gymtracker.ui.screens.EditWorkoutScreen
 
 @Composable
 fun NavGraph() {
@@ -28,12 +33,27 @@ fun NavGraph() {
 
     val database = DatabaseProvider.getDatabase(context)
 
-    val repository = WorkoutRepository(
+    val workoutRepository = WorkoutRepository(
         database.workoutDao()
     )
 
     val workoutViewModel: WorkoutViewModel = viewModel(
-        factory = WorkoutViewModelFactory(repository)
+        factory = WorkoutViewModelFactory(workoutRepository)
+    )
+
+    val exerciseRepository = ExerciseRepository(
+        database.exerciseDao()
+    )
+
+    val workoutExerciseRepository = WorkoutExerciseRepository(
+        database.workoutExerciseDao()
+    )
+
+    val exerciseViewModel: ExerciseViewModel = viewModel(
+        factory = ExerciseViewModelFactory(
+            exerciseRepository,
+            workoutExerciseRepository
+        )
     )
 
     val navController = rememberNavController()
@@ -79,6 +99,7 @@ fun NavGraph() {
             WorkoutDetailScreen(
                 workoutId = workoutId,
                 viewModel = workoutViewModel,
+                exerciseViewModel = exerciseViewModel,
                 onAddExerciseClick = { id ->
                     navController.navigate("addExercise/$id")
                 }
@@ -94,6 +115,7 @@ fun NavGraph() {
 
             AddExerciseScreen(
                 workoutId = workoutId,
+                exerciseViewModel = exerciseViewModel,
                 onExerciseSaved = {
                     navController.popBackStack()
                 }
@@ -108,7 +130,7 @@ fun NavGraph() {
                     ?.toLongOrNull() ?: 0L
 
             var workout by remember {
-                mutableStateOf<com.BeatrizSantos.gymtracker.data.local.WorkoutEntity?>(null)
+                mutableStateOf<WorkoutEntity?>(null)
             }
 
             LaunchedEffect(workoutId) {

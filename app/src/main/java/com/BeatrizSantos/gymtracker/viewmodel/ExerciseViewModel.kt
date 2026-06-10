@@ -41,4 +41,11 @@ class ExerciseViewModel(
             )
         }
     }
+
+    fun getExercisesForWorkout(
+        workoutId: Long
+    ) =
+        workoutExerciseRepository.getExercisesForWorkout(
+            workoutId
+        )
 }

@@ -5,10 +5,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModel
 
 @Composable
 fun AddExerciseScreen(
     workoutId: Long,
+    exerciseViewModel: ExerciseViewModel,
     onExerciseSaved: () -> Unit
 ) {
 
@@ -78,6 +80,15 @@ fun AddExerciseScreen(
                     sets.isNotBlank() &&
                     reps.isNotBlank()
                 ) {
+
+                    exerciseViewModel.saveExercise(
+                        workoutId = workoutId,
+                        name = exerciseName,
+                        sets = sets.toIntOrNull() ?: 0,
+                        reps = reps.toIntOrNull() ?: 0,
+                        weight = weight.toDoubleOrNull() ?: 0.0
+                    )
+
                     onExerciseSaved()
                 }
             }

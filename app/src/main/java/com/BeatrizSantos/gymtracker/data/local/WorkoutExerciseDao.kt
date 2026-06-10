@@ -14,9 +14,20 @@ interface WorkoutExerciseDao {
     )
 
     @Query(
-        "SELECT * FROM workout_exercises WHERE workoutId = :workoutId"
+        """
+        SELECT
+            e.exerciseId AS exerciseId,
+            e.name AS exerciseName,
+            we.sets AS sets,
+            we.reps AS reps,
+            we.weight AS weight
+        FROM workout_exercises we
+        INNER JOIN exercises e
+            ON we.exerciseId = e.exerciseId
+        WHERE we.workoutId = :workoutId
+        """
     )
     fun getExercisesForWorkout(
         workoutId: Long
-    ): Flow<List<WorkoutExerciseEntity>>
+    ): Flow<List<WorkoutExerciseWithName>>
 }
