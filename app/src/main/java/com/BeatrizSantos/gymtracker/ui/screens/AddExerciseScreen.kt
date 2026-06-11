@@ -3,12 +3,12 @@ package com.BeatrizSantos.gymtracker.ui.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModel
 import com.BeatrizSantos.gymtracker.data.model.exerciseCatalog
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 
 @Composable
 fun AddExerciseScreen(
@@ -19,9 +19,11 @@ fun AddExerciseScreen(
 ) {
 
     var exerciseName by remember { mutableStateOf("") }
+
     var expanded by remember {
         mutableStateOf(false)
     }
+
     var sets by remember { mutableStateOf("") }
     var reps by remember { mutableStateOf("") }
     var weight by remember { mutableStateOf("") }
@@ -32,16 +34,48 @@ fun AddExerciseScreen(
             .padding(16.dp)
     ) {
 
-        Text(
-            text = "Novo Exercício",
-            style = MaterialTheme.typography.headlineMedium
+        Spacer(
+            modifier = Modifier.height(48.dp)
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Novo Exercício",
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
+        )
 
-        Text("Treino ID: $workoutId")
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Card(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text("Treino")
+
+                Spacer(
+                    modifier = Modifier.height(4.dp)
+                )
+
+                Text(
+                    text = "ID: $workoutId",
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+        }
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
 
         Button(
             onClick = {
@@ -75,14 +109,15 @@ fun AddExerciseScreen(
                     onClick = {
 
                         exerciseName = exercise
-
                         expanded = false
                     }
                 )
             }
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
 
         OutlinedTextField(
             value = sets,
@@ -91,7 +126,9 @@ fun AddExerciseScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
 
         OutlinedTextField(
             value = reps,
@@ -100,7 +137,9 @@ fun AddExerciseScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
 
         OutlinedTextField(
             value = weight,

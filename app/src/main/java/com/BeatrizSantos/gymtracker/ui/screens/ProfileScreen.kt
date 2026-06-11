@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -15,7 +16,7 @@ fun ProfileScreen(
         name: String,
         goal: String
     ) -> Unit
-){
+) {
 
     var name by remember {
         mutableStateOf(initialName)
@@ -31,9 +32,15 @@ fun ProfileScreen(
             .padding(16.dp)
     ) {
 
+        Spacer(
+            modifier = Modifier.height(48.dp)
+        )
+
         Text(
             text = title,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
 
         Spacer(
