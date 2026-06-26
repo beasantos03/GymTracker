@@ -8,3 +8,20 @@ data class Exercise(
     val reps: Int,
     val weight: Double
 )
+
+val ExerciseCatalog = listOf(
+    "Supino",
+    "Supino Inclinado",
+    "Agachamento",
+    "Leg Press",
+    "Extensora",
+    "Puxada",
+    "Remada",
+    "Desenvolvimento Militar",
+    "Elevação Lateral",
+    "Face Pull",
+    "Curl Bíceps",
+    "Hammer Curl",
+    "Tríceps Pulldown",
+    "Gémeos"
+)

@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.BeatrizSantos.gymtracker.viewmodel.ExerciseViewModel
-import com.BeatrizSantos.gymtracker.data.model.exerciseCatalog
+import com.BeatrizSantos.gymtracker.data.model.ExerciseCatalog
 
 @Composable
 fun AddExerciseScreen(
@@ -99,7 +99,7 @@ fun AddExerciseScreen(
             }
         ) {
 
-            exerciseCatalog.forEach { exercise ->
+           ExerciseCatalog.forEach { exercise ->
 
                 DropdownMenuItem(
                     text = {
